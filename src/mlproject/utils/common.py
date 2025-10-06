@@ -1,16 +1,16 @@
 import os
-from box.exception import BoxValueError
+from box.exceptions import BoxValueError
 import yaml
 from mlproject import logger
 import json
 import joblib
-from ensure import ensure_annoatations
+from ensure import ensure_annotations
 from box import ConfigBox
 from pathlib import Path
 from typing import Any
 
 
-@ensure_annoatations
+@ensure_annotations
 def read_yaml(path_to_yaml: Path) -> ConfigBox:
     """reads yaml file and returns
 
@@ -37,7 +37,7 @@ def read_yaml(path_to_yaml: Path) -> ConfigBox:
         raise e
     
 
-@ensure_annoatations
+@ensure_annotations
 def create_directories(path_to_directories:list,verbose=True):
     """create list of directories
         
@@ -50,7 +50,7 @@ def create_directories(path_to_directories:list,verbose=True):
         if verbose:
             logger.info(f"created directory at:{path}")
 
-@ensure_annoatations
+@ensure_annotations
 def save_json(path: Path, data: dict):
     """save json data
         
@@ -63,8 +63,8 @@ def save_json(path: Path, data: dict):
 
     logger.info(f"json file saved at: {path}")
 
-@ensure_annoatations
-def load_json(path:; Path) -> ConfigBox:
+@ensure_annotations
+def load_json(path: Path) -> ConfigBox:
     """load json file data
     Args:
         path (Path): path tp json file
@@ -77,17 +77,17 @@ def load_json(path:; Path) -> ConfigBox:
     logger.info(f"json file loaded sucessfully from : {path}")
     return ConfigBox(content)
 
-@ensure_annoatations
+@ensure_annotations
 def save_bin(data: Any, path: Path):
     """save binary file
     Args:
         data(Any): data to be saved as binary
         path(Path) path to binary file
     """
-joblib.dump(value = data, filename = path)
-logger.info(f"binary file saved at: (path)")
+    joblib.dump(value = data, filename = path)
+    logger.info(f"binary file saved at: (path)")
 
-@ensure_annoatations
+@ensure_annotations
 def load_bin(path:Path) -> Any:
     """load binary data
         
@@ -97,11 +97,11 @@ def load_bin(path:Path) -> Any:
     Returns:
         Any: object stored in the file
     """
-data  joblib.load(path)
-logger.info(f"binary file loaded from: {path}")
-return Data 
+    data = joblib.load(path)
+    logger.info(f"binary file loaded from: {path}")
+    return data 
 
-@ensure_annoatations
+@ensure_annotations
 def get_size(path:Path) -> str:
     """get size in KB
         
